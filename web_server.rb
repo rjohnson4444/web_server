@@ -1,7 +1,6 @@
 # Tell my computer that web requests to http://localhost:9292 should be sent to me
 require 'socket'
-require_relative
-# require 'config.ru'
+
 port       = 9293
 tcp_server = TCPServer.new(port)
 

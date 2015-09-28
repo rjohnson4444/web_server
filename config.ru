@@ -11,4 +11,4 @@ class LetsGoExploring
     [status_code, headers, body]
   end
 end
-run(LetsGoExploring.new.call(hash))
+run
