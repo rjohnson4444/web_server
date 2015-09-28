@@ -1,5 +1,6 @@
 # Tell my computer that web requests to http://localhost:9292 should be sent to me
 require 'socket'
+require './lib/http_yeah_you_know_me'
 
 port       = 9293
 tcp_server = TCPServer.new(port)
