@@ -1,4 +1,5 @@
 require 'socket'
+require "stringio"
 
 class HttpYeahYouKnowMe
 
@@ -22,12 +23,16 @@ class HttpYeahYouKnowMe
     env["PATH_INFO"] = line_one[1]
     env["VERSION"] = line_one[2]
     request = @app.call(env)
+    print_response(client, request)
+  end
 
+  def print_response(client, request)
     client.print("HTTP/1.1 #{request[0]} - OK\r\n")
     request[1].each do |key, value|
       client.print("#{key}: #{value}\r\n")
     end
     client.print("\r\n")
+
     client.print(request[2][0])
     client.close
   end
