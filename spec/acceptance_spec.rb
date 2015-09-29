@@ -1,7 +1,5 @@
 require_relative '../lib/http_yeah_you_know_me'
 require 'rest-client'
-require 'sinatra/base'
-require '../web_server/thread'
 
 
 RSpec.describe 'Acceptance test' do
