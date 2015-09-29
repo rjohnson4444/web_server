@@ -2,23 +2,28 @@
 require 'socket'
 require './lib/http_yeah_you_know_me'
 
-port       = 9293
+port       = 9292
 tcp_server = TCPServer.new(port)
 
 # Wait for a request
 client = tcp_server.accept
 
 # Read the request
-line_one = client.gets.split(" ", 2)
+env = {}
+line_one = client.gets.split(" ", 3)
 
+env["REQUEST_METHOD"] = line_one[0]
+env["PATH_INFO"] = line_one[1]
+env["VERSION"] = line_one[2]
+require "pry"
+binding.pry
 array = []
 loop do
   line = client.gets.chomp.split(" ", 2)
   break if line == []
   array << line
 end
-# require "pry"
-# binding.pry
+
 request = array.to_h
 # LetsGoExploring.new.call(request)
 
