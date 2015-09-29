@@ -3,7 +3,7 @@
 # require your code you used for NightWriter
 # note that we are talking to it through a web interface instead of a command-line interface
 # hope you wrote it well enough to support that ;)
-require '../night-writer/lib/night_read'
+require '~/code/mod1/mod1_projects/night-writer/lib/night_write'
 
 # require a webserver named Sinatra
 require 'sinatra/base'
@@ -18,17 +18,18 @@ class NightWriterServer < Sinatra::Base
 
   post '/to_braille' do
     message = params['english-message']
-    braille = Night::Write.call(message) # <-- change this to look like your night writer code
+    braille = Night::NightWrite.new(message).to_braille # <-- change this to look like your night writer code
     "<pre>#{braille}</pre>"
   end
 end
 
 
 # switch this to use your server
-use_my_server = false
+use_my_server = true
+
 
 if use_my_server
-  require_relative 'lib/http_yeah_you_know_me' # <-- probably right, but double check it
+  require_relative '../lib/http_yeah_you_know_me'   # <-- probably right, but double check it
   server = HttpYeahYouKnowMe.new(9292, NightWriterServer)
   at_exit { server.stop }
   server.start
